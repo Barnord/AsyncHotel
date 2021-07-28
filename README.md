@@ -1,6 +1,11 @@
 # AysncHotel
 ## Authors: Qaalid Hashi and Dave Arno
 With Help from Miriam Silva and Joel Connell
+
+## Use
+
+To use, make your requests to the site's address (currently only usable locally) the files can be reached at /api/(query) query being hotels, amenities, or rooms.
+
 ## Diagram
 ![](lab11.png)
 ## Description
