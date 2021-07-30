@@ -1,4 +1,6 @@
 using AsyncHotel.Data;
+using AsyncHotel.Models.Interfaces;
+using AsyncHotel.Models.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -25,6 +27,14 @@ namespace AsyncHotel
                 // Our DATABASE_URL from js days
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
                 options.UseSqlServer(connectionString);
+
+                services.AddTransient<IHotel, HotelService>();
+                services.AddTransient<IRoom, RoomService>();
+                services.AddTransient<IAmenities, AmenitiesService>();
+
+                services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
             });
         }
 

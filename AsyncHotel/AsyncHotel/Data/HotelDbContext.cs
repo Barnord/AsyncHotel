@@ -12,8 +12,18 @@ namespace AsyncHotel.Data
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Amenities> Amenities { get; set; }
+
+        public DbSet<HotelRoom> HotelRooms { get; set; }
         public HotelDbContext(DbContextOptions options) : base(options)
         {
+        }
+
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<HotelRoom>().HasKey(
+                hotelRoom => new { hotelRoom.HotelId, hotelRoom.RoomId }
+              );
         }
     }
 }

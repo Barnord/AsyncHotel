@@ -15,5 +15,7 @@ namespace AsyncHotel.Models
 
         [Required]
         public int Layout { get; set; }
+
+        public List<Hotel> Hotel { get; set; }
     }
 }
