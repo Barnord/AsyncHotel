@@ -4,14 +4,16 @@ using AsyncHotel.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AsyncHotel.Migrations
 {
     [DbContext(typeof(HotelDbContext))]
-    partial class HotelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210802232647_linkedTables")]
+    partial class linkedTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,18 +35,6 @@ namespace AsyncHotel.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Amenities");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Coffee Maker"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Iron"
-                        });
                 });
 
             modelBuilder.Entity("AsyncHotel.Models.Hotel", b =>
@@ -85,18 +75,6 @@ namespace AsyncHotel.Migrations
                     b.HasIndex("RoomId");
 
                     b.ToTable("Hotels");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "1234 Await Lane",
-                            City = "Bellingham",
-                            Country = "USA",
-                            Name = "AsyncInn",
-                            PhoneNumber = 1234567890,
-                            State = "WA"
-                        });
                 });
 
             modelBuilder.Entity("AsyncHotel.Models.HotelRoom", b =>
@@ -131,14 +109,6 @@ namespace AsyncHotel.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Rooms");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Layout = 1,
-                            Name = "Cockroach Suite"
-                        });
                 });
 
             modelBuilder.Entity("AsyncHotel.Models.RoomAmenities", b =>
