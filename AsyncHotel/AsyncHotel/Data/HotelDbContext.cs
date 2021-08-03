@@ -14,6 +14,8 @@ namespace AsyncHotel.Data
         public DbSet<Amenities> Amenities { get; set; }
 
         public DbSet<HotelRoom> HotelRooms { get; set; }
+        public DbSet<RoomAmenities> RoomAmenities { get; set; }
+
         public HotelDbContext(DbContextOptions options) : base(options)
         {
         }
@@ -21,9 +23,45 @@ namespace AsyncHotel.Data
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Hotel>().HasData(
+                new Hotel
+                {
+                    Id = 1,
+                    Name = "AsyncInn",
+                    City = "Bellingham",
+                    Address = "1234 Await Lane",
+                    State = "WA",
+                    Country = "USA",
+                    PhoneNumber = 1234567890
+                });
+
+            modelBuilder.Entity<Room>().HasData(
+                new Room
+                {
+                    Id = 1,
+                    Name = "Cockroach Suite",
+                    Layout = 1
+                });
+
+            modelBuilder.Entity<Amenities>().HasData(
+                new Amenities
+                {
+                    Id = 1,
+                    Name = "Coffee Maker"
+                },
+                new Amenities
+                {
+                    Id = 2,
+                    Name = "Iron"
+                });
+
             modelBuilder.Entity<HotelRoom>().HasKey(
                 hotelRoom => new { hotelRoom.HotelId, hotelRoom.RoomId }
-              );
+                );
+
+            modelBuilder.Entity<RoomAmenities>().HasKey(
+                roomAmenity => new { roomAmenity.RoomId, roomAmenity.AmenitiesId }
+                );
         }
     }
 }
