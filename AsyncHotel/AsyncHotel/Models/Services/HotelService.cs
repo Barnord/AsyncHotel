@@ -55,5 +55,17 @@ namespace AsyncHotel.Models.Services
             _context.Entry(hotel).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }
+
+        public async Task AddRoom(int hotelId, int roomId)
+        {
+            HotelRoom hotelRoom = new HotelRoom()
+            {
+                HotelId = hotelId,
+                RoomId = roomId
+            };
+
+            _context.Entry(hotelRoom).State = EntityState.Added;
+            await _context.SaveChangesAsync();
+        }
     }
 }
