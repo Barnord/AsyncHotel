@@ -33,13 +33,19 @@ namespace AsyncHotel.Models.Services
             return await _context.Hotels
                 .Include(s => s.HotelRooms)
                 .ThenInclude(e => e.Room)
+                .ThenInclude(d => d.RoomAmenities)
+                .ThenInclude(f => f.Amenities)
                 .ToListAsync();
         }
 
         public async Task<Hotel> GetHotel(int id)
         {
-            Hotel hotel = await _context.Hotels.FindAsync(id);
-            return hotel;
+            return await _context.Hotels
+                .Include(c => c.HotelRooms)
+                .ThenInclude(e => e.Room)
+                .ThenInclude(d => d.RoomAmenities)
+                .ThenInclude(f => f.Amenities)
+                .FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<Hotel> UpdateHotel(int id, Hotel hotel)

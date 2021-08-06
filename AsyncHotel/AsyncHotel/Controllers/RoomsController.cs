@@ -71,5 +71,14 @@ namespace AsyncHotel.Controllers
 
             return NoContent();
         }
+
+        // POST: api/rooms/5/7
+        [HttpPost]
+        [Route("{roomId}/{amenitiesId}")]
+        public async Task<IActionResult> AddAmenityToRoom(int roomId, int amenitiesId)
+        {
+            await _room.AddAmenity(roomId, amenitiesId);
+            return NoContent();
+        }
     }
 }
