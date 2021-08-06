@@ -28,14 +28,18 @@ namespace AsyncHotel.Models.Services
 
         public async Task<List<Room>> GetRooms()
         {
-            var rooms = await _context.Rooms.ToListAsync();
-            return rooms;
+            return await _context.Rooms
+                .Include(c => c.RoomAmenities)
+                .ThenInclude(e => e.Amenities)
+                .ToListAsync();
         }
 
         public async Task<Room> GetRoom(int id)
         {
-            Room room = await _context.Rooms.FindAsync(id);
-            return room;
+            return await _context.Rooms
+                .Include(c => c.RoomAmenities)
+                .ThenInclude(e => e.Amenities)
+                .FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<Room> UpdateRoom(int id, Room room)
@@ -49,6 +53,18 @@ namespace AsyncHotel.Models.Services
         {
             Room room = await GetRoom(id);
             _context.Entry(room).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddAmenity(int roomId, int amenitiesId)
+        {
+            RoomAmenities roomAmenities = new()
+            {
+                RoomId = roomId,
+                AmenitiesId = amenitiesId
+            };
+
+            _context.Entry(roomAmenities).State = EntityState.Added;
             await _context.SaveChangesAsync();
         }
     }

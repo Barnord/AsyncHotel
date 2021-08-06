@@ -2,7 +2,7 @@
 
 namespace AsyncHotel.Migrations
 {
-    public partial class linkedHotelRoom : Migration
+    public partial class RoomControllerUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

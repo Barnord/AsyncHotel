@@ -16,5 +16,7 @@ namespace AsyncHotel.Models.Interfaces
         Task<Room> UpdateRoom(int id, Room room);
 
         Task Delete(int id);
+
+        Task AddAmenity(int roomId, int amenitiesId);
     }
 }

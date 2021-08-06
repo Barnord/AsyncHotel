@@ -55,6 +55,20 @@ namespace AsyncHotel.Data
                     Name = "Iron"
                 });
 
+            modelBuilder.Entity<HotelRoom>().HasData(
+                new HotelRoom
+                {
+                    HotelId = 1,
+                    RoomId = 1
+                });
+
+            modelBuilder.Entity<RoomAmenities>().HasData(
+                new RoomAmenities
+                {
+                    RoomId = 1,
+                    AmenitiesId = 2
+                });
+
             modelBuilder.Entity<HotelRoom>().HasKey(
                 hotelRoom => new { hotelRoom.HotelId, hotelRoom.RoomId }
                 );
